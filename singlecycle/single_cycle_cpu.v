@@ -32,7 +32,7 @@ module Single_Cycle_CPU (
         .instr_o   (instr)
     );
 
-    // 2. KH?I DECODE & CONTROL (Gi?i mã l?nh)
+    // 2. KH?I DECODE & CONTROL (Gi?i mÃ£ l?nh)
     Ctrl_Unit u_Ctrl_Unit (
         .opcode_i    (instr[6:0]),
         .func3_i     (instr[14:12]),
@@ -75,7 +75,7 @@ module Single_Cycle_CPU (
     );
 
     // =========================================================================
-    // 3. KH?I EXECUTE (Th?c thi & Tính ??a ch? nh?y)
+    // 3. KH?I EXECUTE (Th?c thi & TÃ­nh ??a ch? nh?y)
     //(ALUSrc = 0: rs2_data, 1: imm_extd)
     assign alu_in2 = ALUSrc ? imm_extd : rs2_data;
 
@@ -87,14 +87,14 @@ module Single_Cycle_CPU (
         .ALU_Br      (alu_br)
     );
 
-    // Tính PC + Immediate (cho Branch, JAL, AUIPC)
+    // TÃ­nh PC + Immediate (cho Branch, JAL, AUIPC)
     Add2_32b u_Add_Target (
         .data1_i     (pc_curr),
         .data2_i     (imm_extd),
         .data_o      (pc_target)
     );
 
-    // Tính RS1 + Immediate (cho JALR)
+    // TÃ­nh RS1 + Immediate (cho JALR)
     Add2_32b u_Add_Jalr (
         .data1_i     (rs1_data),
         .data2_i     (imm_extd),
@@ -124,7 +124,7 @@ module Single_Cycle_CPU (
     // Mux 2-sang-1: Ch?n d? li?u U-Type (ImmUI = 0: pc_target [AUIPC], 1: imm_extd [LUI])
     assign ui_data = ImmUI ? imm_extd : pc_target;
 
-    // Mux 4-sang-1: Ch?n k?t qu? cu?i cùng ghi v? RegFile
+    // Mux 4-sang-1: Ch?n k?t qu? cu?i cÃ¹ng ghi v? RegFile
     assign wb_result = (ResultSrc == 2'b00) ? alu_result    :
                        (ResultSrc == 2'b01) ? mem_read_data :
                        (ResultSrc == 2'b10) ? pc_plus4      :
