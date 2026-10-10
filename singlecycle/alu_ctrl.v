@@ -37,7 +37,7 @@ module ALUctrl (
 
             2'b10: begin // R-type, I-type
                 case ({opcode_i, func3_i, func7_i})
-                    // NhÛm R-type (opcode_i = 1)
+                    // Nh√≥m R-type (opcode_i = 1)
                     5'b1_000_0: ALUctrl_o = 4'h0; // ADD
                     5'b1_000_1: ALUctrl_o = 4'h1; // SUB
                     5'b1_100_0: ALUctrl_o = 4'h2; // XOR
@@ -49,7 +49,7 @@ module ALUctrl (
                     5'b1_010_0: ALUctrl_o = 4'h8; // SLT
                     5'b1_011_0: ALUctrl_o = 4'h9; // SLTU
 
-                    // NhÛm I-type (opcode_i = 0): func7_i = 0 v‡ 1
+                    // Nh√≥m I-type (opcode_i = 0): func7_i = 0 v√† 1
                     5'b0_000_0, 5'b0_000_1: ALUctrl_o = 4'h0; // ADDI
                     5'b0_100_0, 5'b0_100_1: ALUctrl_o = 4'h2; // XORI 
                     5'b0_110_0, 5'b0_110_1: ALUctrl_o = 4'h3; // ORI  
