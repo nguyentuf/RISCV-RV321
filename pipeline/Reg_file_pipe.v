@@ -21,7 +21,7 @@ module RegFile_pipe ( // Write first
         end
     end
 
-    // ?u tiên l?y d? li?u WriteData_i n?u ?ang ??c thanh ghi s?p ???c ghi
+    // ?u tiÃªn l?y d? li?u WriteData_i n?u ?ang ??c thanh ghi s?p ???c ghi
     assign RS1_data_o = (RS1_addr_i == 5'b0) ? 32'b0 :
                         (RegWrite_i && (RS1_addr_i == RD_addr_i)) ? WriteData_i : x[RS1_addr_i];
     assign RS2_data_o = (RS2_addr_i == 5'b0) ? 32'b0 :
