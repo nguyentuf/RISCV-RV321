@@ -33,20 +33,20 @@ module tb_Pipeline_Fibonacci();
         $display(" BAT DAU BENCHMARK: FIBONACCI(10) TREN PIPELINE RV32I");
         $display("==========================================================");
 
-        // Theo dıi qu· trÏnh ch?y
+        // Theo d√µi qu√° tr√¨nh ch?y
         while (1) begin
             @(posedge CLK);
             cycle_count = cycle_count + 1;
             
-            // ??m s? l?nh th?c s? ch?t v‡o RegFile / Memory (b? qua bong bÛng stall/flush)
+            // ??m s? l?nh th?c s? ch?t v√†o RegFile / Memory (b? qua bong b√≥ng stall/flush)
             if (dut.RegWrite_W || dut.MemWrite_M) begin
                 instr_count = instr_count + 1;
             end
 
-            // ?i?u ki?n d?ng: Khi PC ? t?ng WB ch?t l?nh BEQ x0, x0, 0 (m„ m·y 0x00000063)
-            // L?nh n‡y n?m ? PC = 0x38
+            // ?i?u ki?n d?ng: Khi PC ? t?ng WB ch?t l?nh BEQ x0, x0, 0 (m√£ m√°y 0x00000063)
+            // L?nh n√†y n?m ? PC = 0x38
             if (dut.PC_F == 32'h00000038) begin
-                // ??i thÍm 4 chu k? ?? l?nh LW cu?i c˘ng ghi k?t qu? v‡o x7 ? t?ng WB
+                // ??i th√™m 4 chu k? ?? l?nh LW cu?i c√πng ghi k?t qu? v√†o x7 ? t?ng WB
                 repeat(4) @(posedge CLK);
                 cycle_count = cycle_count + 4;
                 
@@ -59,11 +59,11 @@ module tb_Pipeline_Fibonacci();
 
                 ipc = $itor(instr_count) / $itor(cycle_count);
                 
-                $display("\n================ B¡O C¡O HI?U N?NG =======================");
+                $display("\n================ B√ÅO C√ÅO HI?U N?NG =======================");
                 $display(" - Tong so lenh thuc thi (Instruction Count): %0d", instr_count);
                 $display(" - Tong so chu ky (Cycle Count)             : %0d cycles", cycle_count);
                 $display(" - Hieu nang IPC (Instructions Per Cycle)   : %0.2f", ipc);
-                $display(" - Ton that do Hazard (Stall/Flush)         : ~%0d cycles", cycle_count - instr_count - 4); // -4 l‡ do n?p pipeline ban ??u
+                $display(" - Ton that do Hazard (Stall/Flush)         : ~%0d cycles", cycle_count - instr_count - 4); // -4 l√† do n?p pipeline ban ??u
                 $display("==========================================================");
                 $finish;
             end
