@@ -1,7 +1,7 @@
 module PC_pipe (
     input  wire        CLK,
     input  wire        nRST,
-    input  wire        Stall_i,   // 1: Gi? nguyên PC
+    input  wire        Stall_i,   // 1: Gi? nguyÃªn PC
     input  wire [31:0] PC_Next_i,
     output reg  [31:0] PC_o
 );
