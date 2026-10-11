@@ -10,7 +10,7 @@ module tb_Single_Cycle_CPU();
         .nRST (nRST)
     );
 
-    // 51 chu k? bao ph? to‡n b? 37 l?nh RV32I
+    // 51 chu k? bao ph? to√†n b? 37 l?nh RV32I
     localparam NUM_TEST_CYCLES = 51;
 
     reg [211:0] expected_trace [0:NUM_TEST_CYCLES-1];
@@ -32,7 +32,7 @@ module tb_Single_Cycle_CPU();
     end
 
     // =========================================================================
-    // TASK 1: IN TR?NG TH¡I 32 THANH GHI T?I TH?I ?I?M B?T K?
+    // TASK 1: IN TR?NG TH√ÅI 32 THANH GHI T?I TH?I ?I?M B?T K?
     // =========================================================================
     task dump_registers(input integer current_cycle);
         integer r;
@@ -53,7 +53,7 @@ module tb_Single_Cycle_CPU();
     endtask
 
     // =========================================================================
-    // TASK 2: IN TR?NG TH¡I DATA MEMORY
+    // TASK 2: IN TR?NG TH√ÅI DATA MEMORY
     // =========================================================================
     task dump_memory(input [31:0] start_addr, input integer num_words);
         integer w, addr;
@@ -75,7 +75,7 @@ module tb_Single_Cycle_CPU();
     endtask
 
     // =========================================================================
-    // LU?NG KI?M TH? CHÕNH (FULL 37 INSTRUCTIONS)
+    // LU?NG KI?M TH? CH√çNH (FULL 37 INSTRUCTIONS)
     // =========================================================================
     initial begin
         $readmemh("D:/kairo/32multi/project_1/expected_trace.hex", expected_trace);
@@ -94,7 +94,7 @@ module tb_Single_Cycle_CPU();
         $display("================= BAT DAU TEST TOAN BO 37 LENH RV32I (51 CHU KY) =================");
 
         for (cycle_cnt = 0; cycle_cnt < NUM_TEST_CYCLES; cycle_cnt = cycle_cnt + 1) begin
-            #4; // Ki?m tra t?i 1ns tr??c s??n lÍn CLK
+            #4; // Ki?m tra t?i 1ns tr??c s??n l√™n CLK
 
             {exp_pc_curr, exp_instr, exp_pc_next, exp_reg_write, exp_rd,
              exp_wb_data, exp_mem_read, exp_mem_write, exp_mem_addr, exp_mem_wdata} = expected_trace[cycle_cnt];
@@ -176,7 +176,7 @@ module tb_Single_Cycle_CPU();
         end
 
         // =====================================================================
-        // KI?M TRA CU?I CŸNG: 32 THANH GHI & 4096 BYTE DATA MEMORY
+        // KI?M TRA CU?I C√ôNG: 32 THANH GHI & 4096 BYTE DATA MEMORY
         // =====================================================================
         dump_registers(NUM_TEST_CYCLES);
 
