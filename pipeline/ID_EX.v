@@ -4,7 +4,7 @@ module ID_EX (
     input  wire        CLK,
     input  wire        nRST,
     input  wire        Flush_i,     
-    // Tín hi?u Control
+    // TÃ­n hi?u Control
     input  wire        RegWrite_i,
     input  wire [ 1:0] ResultSrc_i,
     input  wire [ 3:0] MemWrite_i,
@@ -15,7 +15,7 @@ module ID_EX (
     input  wire        ALUSrc_i,
     input  wire        ImmUI_i,
     input  wire [ 3:0] ALUCtrl_i,
-    // Tín hi?u Datapath
+    // TÃ­n hi?u Datapath
     input  wire [31:0] PC_i,
     input  wire [31:0] PCPlus4_i,
     input  wire [31:0] RS1_data_i,
