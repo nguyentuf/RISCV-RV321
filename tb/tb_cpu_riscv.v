@@ -26,14 +26,14 @@ module tb_Pipeline_CPU();
     end
 
     // =========================================================================
-    // KH?I THEO D’I V¿ IN TR?NG TH¡I PIPELINE T?NG CHU K?
+    // KH?I THEO D√ïI V√Ä IN TR?NG TH√ÅI PIPELINE T?NG CHU K?
     // =========================================================================
     
-    // Bi?n l?u chu?i tÍn l?nh (t?i ?a 8 k˝ t? = 64 bit)
+    // Bi?n l?u chu?i t√™n l?nh (t?i ?a 8 k√Ω t? = 64 bit)
     reg [63:0] if_instr_name;
     reg [63:0] id_instr_name;
 
-    // Task d?ch m„ m·y sang tÍn l?nh
+    // Task d?ch m√£ m√°y sang t√™n l?nh
     task decode_instruction;
         input  [31:0] inst;
         output reg [63:0] name;
@@ -115,14 +115,14 @@ module tb_Pipeline_CPU();
 
     always @(negedge CLK) begin
         if (nRST) begin
-            // Gi?i m„ l?nh ?ang ??ng ? t?ng IF v‡ ID
+            // Gi?i m√£ l?nh ?ang ??ng ? t?ng IF v√† ID
             decode_instruction(dut.Instr_F, if_instr_name);
             decode_instruction(dut.Instr_D, id_instr_name);
 
             $display("\n==========================================================================");
             $display("[Chu ky %0d] (Time: %0t ns)", cycle_cnt, $time);
             
-            // In k?t qu? kËm theo tÍn l?nh (%0s)
+            // In k?t qu? k√®m theo t√™n l?nh (%0s)
             $display("  [IF ] PC = 0x%08h | Instr = 0x%08h (%0s) | Stall_F = %b", 
                      dut.PC_F, dut.Instr_F, if_instr_name, dut.Stall_F);
             
@@ -150,7 +150,7 @@ module tb_Pipeline_CPU();
     end
 
     // =========================================================================
-    // LU?NG KI?M TH? CHÕNH
+    // LU?NG KI?M TH? CH√çNH
     // =========================================================================
     initial begin
         // ??c d? li?u t? file sinh ra b?i Python
@@ -171,14 +171,14 @@ module tb_Pipeline_CPU();
         $display(" BAT DAU MO PHONG PIPELINE CPU (IN CHI TIET TUNG CHU KY)");
         $display("===================================================================");
 
-        // Ch? 100 chu k? ?? to‡n b? l?nh trÙi qua h?t 5 t?ng
+        // Ch? 100 chu k? ?? to√†n b? l?nh tr√¥i qua h?t 5 t?ng
         repeat(100) @(posedge CLK);
         
-        // D?ng l?i ? s??n xu?ng ?? ki?m tra tr?ng th·i cu?i c˘ng
+        // D?ng l?i ? s??n xu?ng ?? ki?m tra tr?ng th√°i cu?i c√πng
         @(negedge CLK);
 
         // -----------------------------------------------------------------
-        // SO S¡NH 32 THANH GHI
+        // SO S√ÅNH 32 THANH GHI
         // -----------------------------------------------------------------
         $display("\n================ KIEM TRA FINAL REGISTERS ==================");
         for (i = 0; i < 32; i = i + 1) begin
@@ -190,7 +190,7 @@ module tb_Pipeline_CPU();
         if (reg_errors == 0) $display(" -> [PASS] Toan bo 32 thanh ghi khop 100%%!");
 
         // -----------------------------------------------------------------
-        // SO S¡NH DATA MEMORY (4096 bytes)
+        // SO S√ÅNH DATA MEMORY (4096 bytes)
         // -----------------------------------------------------------------
         $display("\n================ KIEM TRA FINAL DATA MEMORY ==================");
         for (i = 0; i < 4096; i = i + 1) begin
