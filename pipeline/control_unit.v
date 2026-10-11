@@ -115,7 +115,7 @@ module Ctrl_Unit (
                 Jump_o      = 1'b0;
                 Jalr_o      = 1'b0;
                 Branch_o    = 1'b1;    //  Branch
-                ALUsrc_o    = 1'b0;    // compare RS1 v‡ RS2
+                ALUsrc_o    = 1'b0;    // compare RS1 v√† RS2
                 ALUop_o     = 2'b01;   // check Branch
                 ImmSrc_o    = 3'b011;  // Immediate B-type
                 ImmUI_o     = 1'bx;
@@ -166,7 +166,7 @@ module Ctrl_Unit (
                 ImmUI_o     = 1'b1;    // 1: Ch?n tr?c ti?p imm_extd
             end
 
-            // 9.  U-Type (AUIPC - C?ng 20 bit cao v‡o PC)
+            // 9.  U-Type (AUIPC - C?ng 20 bit cao v√†o PC)
             7'b001_0111: begin
                 RegWrite_o  = 1'b1;
                 ResultSrc_o = 2'b11;   // Ch?n ???ng d? li?u U-type
