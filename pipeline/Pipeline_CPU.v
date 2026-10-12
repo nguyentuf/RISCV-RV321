@@ -32,7 +32,7 @@ module Pipeline_CPU (
     wire [ 1:0] ResultSrc_M;
     wire [ 3:0] MemWrite_M, MemRead_M;
     wire [31:0] ALUResult_M, WriteData_M, PCPlus4_M, UIData_M, ReadData_M;
-    wire [31:0] ForwardData_M; // D‚y ch?n d? li?u Forward t? t?ng MEM
+    wire [31:0] ForwardData_M; // D√¢y ch?n d? li?u Forward t? t?ng MEM
     wire [ 4:0] RD_addr_M;
 
     // Wires T?ng Write-Back (WB)
@@ -47,7 +47,7 @@ module Pipeline_CPU (
     // T?NG 1: INSTRUCTION FETCH (IF)
     // =========================================================================
     
-    // Mux ch?n PC k? ti?p: L?y t? k?t qu? nh?y ? t?ng EX (PCSrc_E), n?u khÙng thÏ PC+4
+    // Mux ch?n PC k? ti?p: L?y t? k?t qu? nh?y ? t?ng EX (PCSrc_E), n?u kh√¥ng th√¨ PC+4
     assign PC_Next_F = PCSrc_E ? Target_E : PCPlus4_F;
 
     PC_pipe u_PC (
@@ -76,7 +76,7 @@ module Pipeline_CPU (
         .CLK       (CLK),
         .nRST      (nRST),
         .Stall_i   (Stall_D),       // D?ng khi Load-Use
-        .Flush_i   (Flush_D),       // XÛa khi Branch/Jump
+        .Flush_i   (Flush_D),       // X√≥a khi Branch/Jump
         .PC_i      (PC_F),
         .PCPlus4_i (PCPlus4_F),
         .Instr_i   (Instr_F),
@@ -135,7 +135,7 @@ module Pipeline_CPU (
     ID_EX u_ID_EX (
         .CLK         (CLK),
         .nRST        (nRST),
-        .Flush_i     (Flush_E),      // XÛa khi Load-Use ho?c Branch/Jump
+        .Flush_i     (Flush_E),      // X√≥a khi Load-Use ho?c Branch/Jump
         .RegWrite_i  (RegWrite_D),
         .ResultSrc_i (ResultSrc_D),
         .MemWrite_i  (MemWrite_D),
@@ -176,7 +176,7 @@ module Pipeline_CPU (
     );
 
     // =========================================================================
-    // T?NG 3: EXECUTE (EX) V¿ FORWARDING
+    // T?NG 3: EXECUTE (EX) V√Ä FORWARDING
     // =========================================================================
     Forwarding_Unit u_Forwarding_Unit (
         .RS1_addr_E (RS1_addr_E),
@@ -204,7 +204,7 @@ module Pipeline_CPU (
                              (ForwardB_E == 2'b01) ? Result_W      :
                                                      RS2_data_E;
 
-    // Ch?n gi?a Immediate ho?c RS2 ?„ Forward
+    // Ch?n gi?a Immediate ho?c RS2 ?√£ Forward
     assign ALUIn2_E = ALUSrc_E ? ImmExtd_E : Forwarded_RS2_E;
 
     ALU u_ALU (
@@ -215,14 +215,14 @@ module Pipeline_CPU (
         .ALU_Br      (ALU_Br_E)
     );
 
-    // TÌnh ??a ch? Branch / JAL / AUIPC (PC + Imm)
+    // T√≠nh ??a ch? Branch / JAL / AUIPC (PC + Imm)
     Add2_32b u_Add_Target (
         .data1_i     (PC_E),
         .data2_i     (ImmExtd_E),
         .data_o      (PCTarget_E)
     );
 
-    // TÌnh ??a ch? JALR (D˘ng RS1 ?„ Forward + Imm)
+    // T√≠nh ??a ch? JALR (D√πng RS1 ?√£ Forward + Imm)
     Add2_32b u_Add_Jalr (
         .data1_i     (ALUIn1_E),
         .data2_i     (ImmExtd_E),
@@ -232,7 +232,7 @@ module Pipeline_CPU (
     assign UIData_E = ImmUI_E ? ImmExtd_E : PCTarget_E;
 
     assign PCSrc_E  = (Branch_E & ALU_Br_E) | Jump_E;
-    assign Target_E = Jalr_E ? {JalrTarget_E[31:1], 1'b0} : PCTarget_E; // XÛa bit 0 khi JALR
+    assign Target_E = Jalr_E ? {JalrTarget_E[31:1], 1'b0} : PCTarget_E; // X√≥a bit 0 khi JALR
 
     // -------------------------------------------------------------------------
     // THANH GHI EX/MEM
@@ -245,7 +245,7 @@ module Pipeline_CPU (
         .MemWrite_i  (MemWrite_E),
         .MemRead_i   (MemRead_E),
         .ALUResult_i (ALUResult_E),
-        .WriteData_i (Forwarded_RS2_E), // RS2 ?„ ???c Forward
+        .WriteData_i (Forwarded_RS2_E), // RS2 ?√£ ???c Forward
         .PCPlus4_i   (PCPlus4_E),
         .UIData_i    (UIData_E),
         .RD_addr_i   (RD_addr_E),
@@ -305,14 +305,14 @@ module Pipeline_CPU (
                                                UIData_W;
 
     // =========================================================================
-    // T?NG 6: HAZARD UNIT (DÚ xung ??t Load-Use v‡ Control)
+    // T?NG 6: HAZARD UNIT (D√≤ xung ??t Load-Use v√† Control)
     // =========================================================================
     Hazard_Unit u_Hazard_Unit (
         .RS1_addr_D (Instr_D[19:15]),
         .RS2_addr_D (Instr_D[24:20]),
         .RD_addr_E  (RD_addr_E),
         .MemRead_E  (MemRead_E),
-        .PCSrc_E    (PCSrc_E),        // Khi b?ng 1 -> XÛa l?nh ?ang n?p nh?m ? IF v‡ ID
+        .PCSrc_E    (PCSrc_E),        // Khi b?ng 1 -> X√≥a l?nh ?ang n?p nh?m ? IF v√† ID
         
         .Stall_F    (Stall_F),
         .Stall_D    (Stall_D),
